@@ -16,7 +16,9 @@ class MealsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemBuilder: ((context, index) {
-        return Container();
+        return Container(child: Column(children: [
+          Text(meals[index].title),
+        ]),);
       }),
       itemCount: meals.length,
     );
