@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:meals/widgets/filter_switch_item.dart';
 
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
@@ -9,7 +9,19 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  var _glutenFreeSet = false;
+
+  final Map<String, bool> itemSetsMap = {
+    'gluten-free': false,
+    'lactose-free': false,
+    'vegeterian': false,
+    'vegan':false,
+  };
+
+  void _checkitem(bool isCheck, String key) {
+    setState(() {
+      itemSetsMap[key] = isCheck;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +29,25 @@ class _FiltersScreenState extends State<FiltersScreen> {
       appBar: AppBar(title: const Text('Filters')),
       body: Column(
         children: [
-          SwitchListTile(
-            value: _glutenFreeSet,
-            onChanged: (isChecked) {
-              setState(() {
-                _glutenFreeSet = isChecked;
-              });
-            },
-            title: Text(
-              'Gluten-Free',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
-            ),
-            subtitle: Text(
-              'Only include gluten-free meals.',
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
+          FilterSwitchItem(
+            title: 'Gluten-Free',
+            itemSet: itemSetsMap['gluten-free']!,
+            onCheckitem: _checkitem,
+          ),
+          FilterSwitchItem(
+            title: 'Lactose-Free',
+            itemSet: itemSetsMap['lactose-free']!,
+            onCheckitem: _checkitem,
+          ),
+          FilterSwitchItem(
+            title: 'Vegeterian',
+            itemSet: itemSetsMap['vegeterian']!,
+            onCheckitem: _checkitem,
+          ),
+          FilterSwitchItem(
+            title: 'Vegan',
+            itemSet: itemSetsMap['vegan']!,
+            onCheckitem: _checkitem,
           ),
         ],
       ),
