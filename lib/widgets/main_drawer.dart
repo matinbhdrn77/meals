@@ -47,7 +47,7 @@ class MainDrawer extends StatelessWidget {
             ),
             title: Text(
               'Meals',
-              style: Theme.of(context).textTheme.titleSmall.copyWith(
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 24,
                   ),
@@ -62,7 +62,7 @@ class MainDrawer extends StatelessWidget {
             ),
             title: Text(
               'Filters',
-              style: Theme.of(context).textTheme.titleSmall.copyWith(
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 24,
                   ),
