@@ -15,6 +15,13 @@ class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favouriteMeals = [];
 
+  void _showInfoMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
   void _toggleMealFavouriteStatus(Meal meal) {
     final isExist = _favouriteMeals.contains(meal);
 
@@ -22,10 +29,12 @@ class _TabsScreenState extends State<TabsScreen> {
       setState(() {
         _favouriteMeals.remove(meal);
       });
+      _showInfoMessage('removed from favourites!');
     } else {
       setState(() {
         _favouriteMeals.add(meal);
       });
+      _showInfoMessage('added to favourites');
     }
   }
 
