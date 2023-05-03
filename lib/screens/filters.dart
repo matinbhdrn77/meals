@@ -27,29 +27,35 @@ class _FiltersScreenState extends State<FiltersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Filters')),
-      body: Column(
-        children: [
-          FilterSwitchItem(
-            title: 'Gluten-Free',
-            itemSet: itemSetsMap['gluten-free']!,
-            onCheckitem: _checkitem,
-          ),
-          FilterSwitchItem(
-            title: 'Lactose-Free',
-            itemSet: itemSetsMap['lactose-free']!,
-            onCheckitem: _checkitem,
-          ),
-          FilterSwitchItem(
-            title: 'Vegeterian',
-            itemSet: itemSetsMap['vegeterian']!,
-            onCheckitem: _checkitem,
-          ),
-          FilterSwitchItem(
-            title: 'Vegan',
-            itemSet: itemSetsMap['vegan']!,
-            onCheckitem: _checkitem,
-          ),
-        ],
+      body: WillPopScope(
+        onWillPop: () async {
+          Navigator.of(context).pop(itemSetsMap);
+          return false;
+        },
+        child: Column(
+          children: [
+            FilterSwitchItem(
+              title: 'Gluten-Free',
+              itemSet: itemSetsMap['gluten-free']!,
+              onCheckitem: _checkitem,
+            ),
+            FilterSwitchItem(
+              title: 'Lactose-Free',
+              itemSet: itemSetsMap['lactose-free']!,
+              onCheckitem: _checkitem,
+            ),
+            FilterSwitchItem(
+              title: 'Vegeterian',
+              itemSet: itemSetsMap['vegeterian']!,
+              onCheckitem: _checkitem,
+            ),
+            FilterSwitchItem(
+              title: 'Vegan',
+              itemSet: itemSetsMap['vegan']!,
+              onCheckitem: _checkitem,
+            ),
+          ],
+        ),
       ),
     );
   }
