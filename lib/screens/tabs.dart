@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/data/random_data.dart';
 
 import 'package:meals/models/meal.dart';
 import 'package:meals/screens/categories.dart';
@@ -70,12 +71,30 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Meal> availableFilteredMeals = availableMeals.where((meal) {
+      if (_selectedFilters['gluten-free']! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (_selectedFilters['lactose-free']! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (_selectedFilters['vegeterian']! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (_selectedFilters['vegan']! && !meal.isGlutenFree) {
+        return false;
+      }
+      return true;
+    }).toList();
+
     Widget activePage = CategoriesScreen(
       onToggleFavourite: _toggleMealFavouriteStatus,
+      availableMeals: availableFilteredMeals,
     );
     String activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
+      // as favourite screen
       activePage = MealsScreen(
         meals: _favouriteMeals,
         onToggleFavourite: _toggleMealFavouriteStatus,
